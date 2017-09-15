@@ -15,7 +15,14 @@ public class Nodo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        MyList a = new MyList(12);
+        Node b;
+        a.insertFirst(21);
+        a.insertFirst(25);
+        a.insertLast(9);
+        a.insertLast(15);
+        b = a.fetch(12);
+        System.out.println(b.data);
     }
     
 }

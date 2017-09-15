@@ -9,12 +9,12 @@ package nodo;
  *
  * @author Osiris
  */
-public class MyList {
+public class MyList <T>{
     Node first = null;
     Node last = null;
     Node pointer = null;
     
-    MyList(int d){
+    MyList(T d){
         Node node = new Node(d);
         first = node;
         last = node;
@@ -25,7 +25,7 @@ public class MyList {
         return first == null;
     }
     
-    public void insertFirst(int d){
+    public void insertFirst(T d){
         Node node = new Node(d);
         if (isEmpty()){
             first = node;
@@ -36,7 +36,7 @@ public class MyList {
             first = node;
         }
     }
-    public void insertLast(int d){
+    public void insertLast(T d){
         Node node = new Node(d);
         if (isEmpty()){
             first = node;
@@ -69,5 +69,69 @@ public class MyList {
                 last.next = pointer = null;
             }
         }
+    }
+    public boolean deleteNode(T n){
+        Node p = fetchBack(n);
+        if (p != null){
+            if (p.data == n){
+                deleteFirst();
+                return true;
+            }else{
+                p.next = p.next.next;
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
+    public int width (){
+        int r = 0;
+        if(isEmpty()){
+            return 0;
+        }
+        while(pointer.next != last){
+            pointer = pointer.next;
+            r++;
+        }
+        return r + 1;
+    }
+    public Node fetchBack(T n){
+        if (!isEmpty()){
+            if (first == last){
+                if (first.data == n){
+                    return first;
+                }
+                return null;
+            }
+            if (first.data == n){
+                return first;
+            }
+            pointer = first;
+            while(pointer.next != null){
+                if (pointer.next.data == n){
+                    return pointer;
+                }
+                pointer = pointer.next;
+            }
+        }
+        return null;
+    }
+    public Node fetch (T n){
+        if (!isEmpty()){
+            if (first == last){
+                if (first.data == n){
+                    return first;
+                }
+            }else{
+                pointer = first;
+                while (pointer != null){
+                    if (pointer.data == n){
+                        return pointer;
+                    }
+                    pointer = pointer.next;
+                }
+            }
+        }
+        return null;
     }
 }

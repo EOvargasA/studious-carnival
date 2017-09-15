@@ -9,11 +9,11 @@ package nodo;
  *
  * @author Osiris
  */
-public class Node {
-    int data;
+public class Node <T> {
+    T data;
     Node next;
     
-    Node (int d){
+    Node (T d){
         data = d;
         next = null;
     }
