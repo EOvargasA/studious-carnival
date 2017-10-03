@@ -13,12 +13,14 @@ public class MyList <T>{
     Node first = null;
     Node last = null;
     Node pointer = null;
+    int length;
     
     MyList(T d){
         Node node = new Node(d);
         first = node;
         last = node;
         node.next = null;
+        length = 1;
     }
     
     public boolean isEmpty(){
@@ -35,6 +37,7 @@ public class MyList <T>{
             node.next = first;
             first = node;
         }
+        length++;
     }
     public void insertLast(T d){
         Node node = new Node(d);
@@ -46,6 +49,7 @@ public class MyList <T>{
             last.next = node;
             last = node;
         }
+        length++;
     }
     public void deleteFirst(){
         if (!isEmpty()){
@@ -54,6 +58,7 @@ public class MyList <T>{
             }else{
                 first = first.next;
             }
+            length--;
         }
     }
     public void deleteLast(){
@@ -69,6 +74,7 @@ public class MyList <T>{
                 last.next = pointer = null;
             }
         }
+        length--;
     }
     public boolean deleteNode(T n){
         Node p = fetchBack(n);
@@ -78,22 +84,12 @@ public class MyList <T>{
                 return true;
             }else{
                 p.next = p.next.next;
+                length--;
                 return true;
             }
         }else{
             return false;
         }
-    }
-    public int width (){
-        int r = 0;
-        if(isEmpty()){
-            return 0;
-        }
-        while(pointer.next != last){
-            pointer = pointer.next;
-            r++;
-        }
-        return r + 1;
     }
     public Node fetchBack(T n){
         if (!isEmpty()){
@@ -124,7 +120,7 @@ public class MyList <T>{
                 }
             }else{
                 pointer = first;
-                while (pointer != null){
+                for (int i = 0; i <= length; i++){
                     if (pointer.data == n){
                         return pointer;
                     }
@@ -133,5 +129,14 @@ public class MyList <T>{
             }
         }
         return null;
+    }
+    public void showList(){
+        pointer = first;
+        System.out.print("First->");
+        for (int i = 0; i < length; i++){
+            System.out.print("["+pointer.data.toString()+"]->");
+            pointer = pointer.next;
+        }
+        System.out.println("Last");
     }
 }
